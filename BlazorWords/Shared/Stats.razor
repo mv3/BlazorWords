@@ -1,0 +1,57 @@
+﻿@inherits StatsBase
+@using BlazorWords.Constants
+
+<div class="modal fade" id="statsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark border-none text-center">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title">STATISTICS</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h2 id="statPlayed">@GamesWon</h2>
+                            <div>Won</div>
+                        </div>
+                        <div class="col">
+                            <h2 id="statPlayed">@GamesPlayed</h2>
+                            <div>Played</div>
+                        </div>
+                        <div class="col">
+                            <h2 id="statWinPct">@WinPercent</h2>
+                            <div>Win %</div>
+                        </div>
+                        <div class="col">
+                            <h2 id="statCurrStreak">@CurrentStreak</h2>
+                            <div>Current Streak</div>
+                        </div>
+                        <div class="col">
+                            <h2 id="statMaxStreak">@MaxStreak</h2>
+                            <div>Max Streak</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h6>GUESS DISTRIBUTION</h6>
+                    @foreach (var dist in GuessDist)
+                    {
+                        <div class="row">
+                            <div class="col-1">
+                                <span>@(dist.GuessNumber + 1)</span>
+                            </div>
+                            <div class="col">
+                                <div id="guessDist-@dist.GuessNumber" class="progress-bar mt-1" role="progressbar" style="width: @dist.Percentage%; background-color:@dist.Color;">@dist.GuessCount</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success d-flex justify-content-center align-content-between" @onclick="ShareResult"><span class="material-icons-outlined">share</span><span>&nbsp;Share Result</span></button>
+                <button type="button" class="btn btn-success d-flex justify-content-center align-content-between" @onclick="ShareStats"><span class="material-icons-outlined">share</span><span>&nbsp;Share Stats</span></button>
+            </div>
+        </div>
+    </div>
+</div>

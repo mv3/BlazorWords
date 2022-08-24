@@ -1,0 +1,66 @@
+﻿@inherits IndexBase
+@page "/"
+@using System.Web
+@using BlazorWords.Constants
+
+<div class="text-center">
+    <div id="hint">
+        <blockquote class="text-secondary user-select-none">Hint: @CurrentWord.Hint</blockquote>
+    </div>
+    <div id="guessBox" class="letterNormal">
+        @foreach(var userGuess in CurrentUserWord.UserGuesses)
+        {
+            <div class="letterRow @string.Join(" ", userGuess.ClassList)">
+                @foreach(var letter in userGuess.GuessLetters)
+                {
+                    <div id="guess-@(userGuess.GuessNumber)-letter-@(letter.Number)" class="letterTile @string.Join(" ", letter.ClassList)" style="@letter.Style">@HttpUtility.HtmlDecode(letter.Letter)</div>
+                }
+            </div>
+        }
+    </div>
+    <div id="keyboard">
+        @foreach (var keyRow in keyboard.KeyRows)
+        {
+            <div class="keyRow">
+                @foreach (var key in keyRow.Keys)
+                {
+                    <button type="button" class="btn btn-secondary key @string.Join(" ", key.ClassList)" style="background-color:@key.KeyColor; border-color: @key.KeyColor;" @onclick="()=>OnLetterKey(key.KeyText)">
+                        @key.KeyText
+                    </button>
+                }
+            </div>
+        }
+    </div>
+    @if (ShowDefinition)
+    {
+        <div id="definition" class="user-select-none">
+            <blockquote cite="@CurrentWord.Link" class="text-secondary"><p>@CurrentWord.Definition</p></blockquote>
+            <p><cite><a href="@CurrentWord.Link" target="_blank">Learn more...</a></cite></p>
+
+        </div>
+    }
+
+    <div id="navigation">
+        @if (ShowPrevButton)
+        {
+            <button type="button" id="previousWord" class="btn btn-secondary" @onclick="OnPrevWordAsync">Previous Word</button>
+        }
+
+        @if (ShowNextButton)
+        {
+            <button type="button" id="nextWord" class="btn btn-secondary ms-1" @onclick="OnNextWord">Next Word</button>
+
+        }
+    </div>
+    @if (NoMoreWords)
+    {
+        <div id="gameOver">
+            <p>@Messages.NO_MORE_WORDS</p>
+        </div>
+    }
+</div>
+
+
+
+
+<button type="button" class="btn btn-sm btn-danger"  @onclick="ResetData">Reset Data</button>

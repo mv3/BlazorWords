@@ -1,0 +1,40 @@
+﻿.letterTile {
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+    border: thin solid #808080;
+    line-height: 1.5em;
+    margin: 0.1em;
+    user-select: none;
+    background-color: #212529;
+}
+
+.letter {
+}
+
+.letterRow {
+}
+
+.keyRow {
+    margin-bottom: .4rem;
+    margin-top: .4rem;
+}
+
+.key {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 2em;
+    margin: 0em .2em;
+}
+
+.keyDelete {
+    width: 2.5em;
+}
+
+.keyEnter {
+    width: 4em;
+}
+
+.letterNormal {
+    font-size: 2rem;
+}
